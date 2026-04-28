@@ -1,3 +1,4 @@
 {
-    "TaskManagement":["TaskManagement.taskmanagement.core"]
+    "TaskManagement":["TaskManagement.taskmanagement.core"],
+    "Project":["TaskManagement.project.core"]
 }
