@@ -1,0 +1,22 @@
+namespace FinalTest
+
+features
+	SchedulingManagementSystem
+		mandatory
+			TaskManagement
+		optional
+			KanbanBoard
+			DateScheduling
+			Reminder
+				or
+					InAppNotification
+					EmailNotification
+			CalendarView
+				alternative
+					DailyView
+					WeeklyView
+					MonthlyView
+
+constraints
+	Reminder => DateScheduling
+	CalendarView => DateScheduling
