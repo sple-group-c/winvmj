@@ -1,22 +1,16 @@
-namespace FinalTest
-
 features
-	SchedulingManagementSystem
-		mandatory
-			TaskManagement
-		optional
-			KanbanBoard
-			DateScheduling
-			Reminder
-				or
-					InAppNotification
-					EmailNotification
-			CalendarView
-				alternative
-					DailyView
-					WeeklyView
-					MonthlyView
+    SchedulingManagementSystem
+        mandatory
+            TaskManagement
+        optional
+            Project
+            Label
+            BeritaBoard
+            Reminder
+            MeetingManagement
 
 constraints
-	Reminder => DateScheduling
-	CalendarView => DateScheduling
+    Project => Label
+    Project | Label | BeritaBoard
+    !(BeritaBoard & Reminder)
+    !(Label & BeritaBoard)
