@@ -18,11 +18,9 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementCompone
 public class MeetingManagementImpl extends MeetingManagementDecorator {
 
 	public MeetingManagementImpl() {
-        super();
-		Random r = new Random();
-		this. = Math.abs(r.nextInt());
-        this.objectName = MeetingManagementImpl.class.getName();
-    }
+		super();
+		this.objectName = MeetingManagementImpl.class.getName();
+	}
 
 	public MeetingManagementImpl(MeetingManagementComponent record) {
 		super(record, MeetingManagementImpl.class.getName());
