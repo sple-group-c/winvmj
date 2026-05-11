@@ -14,9 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-@Entity(name="meetingmanagement_impl")
-@Table(name="meetingmanagement_impl")
+@Entity(name = "meetingmanagement_impl")
+@Table(name = "meetingmanagement_impl")
 public class MeetingManagementImpl extends MeetingManagementComponent {
 
 	public MeetingManagementImpl(int idMeeting, String name, String startDate, String endDate, String location) {
@@ -36,7 +35,8 @@ public class MeetingManagementImpl extends MeetingManagementComponent {
 		this.location = location;
 	}
 
-	public MeetingManagementImpl() { }
+	public MeetingManagementImpl() {
+	}
 
 	public int getIdMeeting() {
 		return this.idMeeting;
@@ -45,6 +45,7 @@ public class MeetingManagementImpl extends MeetingManagementComponent {
 	public void setIdMeeting(int idMeeting) {
 		this.idMeeting = idMeeting;
 	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -52,6 +53,7 @@ public class MeetingManagementImpl extends MeetingManagementComponent {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getStartDate() {
 		return this.startDate;
 	}
@@ -59,6 +61,7 @@ public class MeetingManagementImpl extends MeetingManagementComponent {
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
+
 	public String getEndDate() {
 		return this.endDate;
 	}
@@ -66,6 +69,7 @@ public class MeetingManagementImpl extends MeetingManagementComponent {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
 	public String getLocation() {
 		return this.location;
 	}
@@ -74,16 +78,15 @@ public class MeetingManagementImpl extends MeetingManagementComponent {
 		this.location = location;
 	}
 
-	
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> meetingmanagementMap = new HashMap<String,Object>();
-		meetingmanagementMap.put("idMeeting",getIdMeeting());
-		meetingmanagementMap.put("name",getName());
-		meetingmanagementMap.put("startDate",getStartDate());
-		meetingmanagementMap.put("endDate",getEndDate());
-		meetingmanagementMap.put("location",getLocation());
+		HashMap<String, Object> meetingmanagementMap = new HashMap<String, Object>();
+		meetingmanagementMap.put("idMeeting", getIdMeeting());
+		meetingmanagementMap.put("name", getName());
+		meetingmanagementMap.put("startDate", getStartDate());
+		meetingmanagementMap.put("endDate", getEndDate());
+		meetingmanagementMap.put("location", getLocation());
 
-        return meetingmanagementMap;
-    }
+		return meetingmanagementMap;
+	}
 
 }

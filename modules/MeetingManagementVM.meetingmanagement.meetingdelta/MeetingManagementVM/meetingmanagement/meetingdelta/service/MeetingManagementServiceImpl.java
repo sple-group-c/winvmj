@@ -13,11 +13,11 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementDecorat
 import MeetingManagementVM.meetingmanagement.MeetingManagementFactory;
 
 public class MeetingManagementServiceImpl extends MeetingManagementServiceDecorator {
-    public MeetingManagementServiceImpl (MeetingManagementServiceComponent record) {
-        super(record);
-    }
+	public MeetingManagementServiceImpl(MeetingManagementServiceComponent record) {
+		super(record);
+	}
 
- 	public MeetingManagement createMeetingManagement(Map<String, Object> requestBody){
+	public MeetingManagement createMeetingManagement(Map<String, Object> requestBody) {
 		String idMeetingStr = (String) requestBody.get("idMeeting");
 		int idMeeting = Integer.parseInt(idMeetingStr);
 		String name = (String) requestBody.get("name");
@@ -25,12 +25,14 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 		String endDate = (String) requestBody.get("endDate");
 		String location = (String) requestBody.get("location");
 		MeetingManagement meetingmanagementmeetingdelta = record.createMeetingManagement(requestBody);
-		MeetingManagement meetingmanagementmeetingdeltadeco = MeetingManagementFactory.createMeetingManagement("MeetingManagementVM.meetingmanagement.meetingdelta", meetingmanagementmeetingdelta, idMeeting, name, startDate, endDate, location);
+		MeetingManagement meetingmanagementmeetingdeltadeco = MeetingManagementFactory.createMeetingManagement(
+				"MeetingManagementVM.meetingmanagement.meetingdelta.model.MeetingManagementImpl",
+				meetingmanagementmeetingdelta);
 		Repository.saveObject(meetingmanagementmeetingdeltadeco);
 		return meetingmanagementmeetingdeltadeco;
 	}
 
-	public MeetingManagement createMeetingManagement(Map<String, Object> requestBody, int id){
+	public MeetingManagement createMeetingManagement(Map<String, Object> requestBody, int id) {
 		MeetingManagement savedMeetingManagement = Repository.getObject(id);
 		String idMeetingStr = (String) requestBody.get("idMeeting");
 		int idMeeting = Integer.parseInt(idMeetingStr);
@@ -40,61 +42,61 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 		String location = (String) requestBody.get("location");
 		UUID recordMeetingManagementIdMeeting = ((MeetingManagementDecorator) savedMeetingManagement).getIdMeeting();
 		MeetingManagement MeetingManagement = record.createMeetingManagement(requestBody, recordMeetingManagementIdMeeting);
-		MeetingManagement meetingmanagementmeetingdelta = MeetingManagementFactory.createMeetingManagement("MeetingManagementVM.meetingmanagement.meetingdelta.model.MeetingManagementImpl", MeetingManagement, idMeeting, name, startDate, endDate, location);
+		MeetingManagement meetingmanagementmeetingdelta = MeetingManagementFactory.createMeetingManagement(
+				"MeetingManagementVM.meetingmanagement.meetingdelta.model.MeetingManagementImpl", MeetingManagement);
 		return meetingmanagementmeetingdelta;
 	}
 
-    public HashMap<String, Object> updateMeetingManagement(Map<String, Object> requestBody){
+	public HashMap<String, Object> updateMeetingManagement(Map<String, Object> requestBody) {
 		String idStr = (String) requestBody.get("idMeeting");
-		
+
 		MeetingManagement meetingmanagementmeetingdelta = Repository.getObject(id);
 		meetingmanagementmeetingdelta = createMeetingManagement(requestBody, id);
-		
+
 		Repository.updateObject(meetingmanagementmeetingdelta);
 		meetingmanagementmeetingdelta = Repository.getObject(id);
-		
-		//to do: fix association attributes
-		
+
+		// to do: fix association attributes
+
 		return meetingmanagementmeetingdelta.toHashMap();
 	}
 
-	public HashMap<String, Object> getMeetingManagement(String idStr){
+	public HashMap<String, Object> getMeetingManagement(String idStr) {
 		int id = Integer.parseInt(idStr);
 		MeetingManagement meetingmanagementmeetingdelta = Repository.getObject(id);
 		return meetingmanagementmeetingdelta.toHashMap();
 	}
 
-	public HashMap<String, Object> getMeetingManagementById(int id){
+	public HashMap<String, Object> getMeetingManagementById(int id) {
 		List<HashMap<String, Object>> meetingmanagementList = getAllMeetingManagement();
-		for (HashMap<String, Object> meetingmanagement : meetingmanagementList){
+		for (HashMap<String, Object> meetingmanagement : meetingmanagementList) {
 			int meetingmanagement_id = ((Double) meetingmanagement.get("idmeeting")).intValue();
-			if (meetingmanagement_id == id){
+			if (meetingmanagement_id == id) {
 				return meetingmanagement;
 			}
 		}
 		return null;
 	}
 
-    public List<HashMap<String,Object>> getAllMeetingManagement(){
+	public List<HashMap<String, Object>> getAllMeetingManagement() {
 		List<MeetingManagement> List = Repository.getAllObject("meetingmanagement_meetingdelta");
 		return transformListToHashMap(List);
 	}
 
-    public List<HashMap<String,Object>> transformListToHashMap(List<MeetingManagement> List){
-		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < List.size(); i++) {
-            resultList.add(List.get(i).toHashMap());
-        }
+	public List<HashMap<String, Object>> transformListToHashMap(List<MeetingManagement> List) {
+		List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
+		for (int i = 0; i < List.size(); i++) {
+			resultList.add(List.get(i).toHashMap());
+		}
 
-        return resultList;
+		return resultList;
 	}
 
-    public List<HashMap<String,Object>> deleteMeetingManagement(Map<String, Object> requestBody){
+	public List<HashMap<String, Object>> deleteMeetingManagement(Map<String, Object> requestBody) {
 		String idStr = ((String) requestBody.get("idMeeting"));
 		int id = Integer.parseInt(idStr);
 		Repository.deleteObject(id);
 		return getAllMeetingManagement();
 	}
 
-	
 }

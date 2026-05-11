@@ -12,11 +12,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="meetingmanagement_comp")
+@Table(name = "meetingmanagement_comp")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class MeetingManagementComponent implements MeetingManagement{
+public abstract class MeetingManagementComponent implements MeetingManagement {
 	@Id
-	protected int idMeeting; 
+	protected int idMeeting;
 	protected String name;
 	protected String startDate;
 	protected String endDate;
@@ -25,17 +25,16 @@ public abstract class MeetingManagementComponent implements MeetingManagement{
 
 	public MeetingManagementComponent() {
 
-	} 
+	}
 
 	public MeetingManagementComponent(
-        int idMeeting, String name, String startDate, String endDate, String location
-    ) {
-        this.idMeeting = idMeeting;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.location = location;
-    }
+			int idMeeting, String name, String startDate, String endDate, String location) {
+		this.idMeeting = idMeeting;
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.location = location;
+	}
 
 	public int getIdMeeting() {
 		return this.idMeeting;
@@ -44,6 +43,7 @@ public abstract class MeetingManagementComponent implements MeetingManagement{
 	public void setIdMeeting(int idMeeting) {
 		this.idMeeting = idMeeting;
 	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -51,6 +51,7 @@ public abstract class MeetingManagementComponent implements MeetingManagement{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getStartDate() {
 		return this.startDate;
 	}
@@ -58,6 +59,7 @@ public abstract class MeetingManagementComponent implements MeetingManagement{
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
+
 	public String getEndDate() {
 		return this.endDate;
 	}
@@ -65,6 +67,7 @@ public abstract class MeetingManagementComponent implements MeetingManagement{
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
 	public String getLocation() {
 		return this.location;
 	}
@@ -72,17 +75,16 @@ public abstract class MeetingManagementComponent implements MeetingManagement{
 	public void setLocation(String location) {
 		this.location = location;
 	}
- 
 
 	@Override
-    public String toString() {
-        return "{" +
-            " idMeeting='" + getIdMeeting() + "'" +
-            " name='" + getName() + "'" +
-            " startDate='" + getStartDate() + "'" +
-            " endDate='" + getEndDate() + "'" +
-            " location='" + getLocation() + "'" +
-            "}";
-    }
-	
+	public String toString() {
+		return "{" +
+				" idMeeting='" + getIdMeeting() + "'" +
+				" name='" + getName() + "'" +
+				" startDate='" + getStartDate() + "'" +
+				" endDate='" + getEndDate() + "'" +
+				" location='" + getLocation() + "'" +
+				"}";
+	}
+
 }

@@ -13,8 +13,8 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementDecorat
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagement;
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementComponent;
 
-@Entity(name="meetingmanagement_meetingdelta")
-@Table(name="meetingmanagement_meetingdelta")
+@Entity(name = "meetingmanagement_meetingdelta")
+@Table(name = "meetingmanagement_meetingdelta")
 public class MeetingManagementImpl extends MeetingManagementDecorator {
 
 	public MeetingManagementImpl() {
@@ -29,13 +29,11 @@ public class MeetingManagementImpl extends MeetingManagementDecorator {
 		this.objectName = MeetingManagementImpl.class.getName();
 	}
 
-
-
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> map = record.toHashMap();
-        map.put("idMeeting", idMeeting);
+		HashMap<String, Object> map = record.toHashMap();
+		map.put("idMeeting", idMeeting);
 
-        return map;
-    }
+		return map;
+	}
 
 }
