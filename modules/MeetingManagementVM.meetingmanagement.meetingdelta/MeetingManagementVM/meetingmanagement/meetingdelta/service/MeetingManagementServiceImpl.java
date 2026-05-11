@@ -40,7 +40,7 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 		String startDate = (String) requestBody.get("startDate");
 		String endDate = (String) requestBody.get("endDate");
 		String location = (String) requestBody.get("location");
-		UUID recordMeetingManagementIdMeeting = ((MeetingManagementDecorator) savedMeetingManagement).getIdMeeting();
+		int recordMeetingManagementIdMeeting = ((MeetingManagementDecorator) savedMeetingManagement).getIdMeeting();
 		MeetingManagement MeetingManagement = record.createMeetingManagement(requestBody, recordMeetingManagementIdMeeting);
 		MeetingManagement meetingmanagementmeetingdelta = MeetingManagementFactory.createMeetingManagement(
 				"MeetingManagementVM.meetingmanagement.meetingdelta.model.MeetingManagementImpl", MeetingManagement);
@@ -49,14 +49,13 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 
 	public HashMap<String, Object> updateMeetingManagement(Map<String, Object> requestBody) {
 		String idStr = (String) requestBody.get("idMeeting");
+		int idMeeting = Integer.parseInt(idStr);
 
-		MeetingManagement meetingmanagementmeetingdelta = Repository.getObject(id);
-		meetingmanagementmeetingdelta = createMeetingManagement(requestBody, id);
+		MeetingManagement meetingmanagementmeetingdelta = Repository.getObject(idMeeting);
+		meetingmanagementmeetingdelta = createMeetingManagement(requestBody, idMeeting);
 
 		Repository.updateObject(meetingmanagementmeetingdelta);
-		meetingmanagementmeetingdelta = Repository.getObject(id);
-
-		// to do: fix association attributes
+		meetingmanagementmeetingdelta = Repository.getObject(idMeeting);
 
 		return meetingmanagementmeetingdelta.toHashMap();
 	}

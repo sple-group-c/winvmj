@@ -41,7 +41,7 @@ public class MeetingManagementResourceImpl extends MeetingManagementResourceDeco
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-	public MeetingManagement createMeetingManagement(VMJExchange vmjExchange, UUID id) {
+	public MeetingManagement createMeetingManagement(VMJExchange vmjExchange, int id) {
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 			Map<String, Object> requestBody = vmjExchange.getPayload();
 			MeetingManagement result = meetingmanagementmeetingdeltaServiceImpl.createMeetingManagement(requestBody, id);
