@@ -13,29 +13,27 @@ import LabelVM.label.core.model.LabelDecorator;
 import LabelVM.label.core.model.Label;
 import LabelVM.label.core.model.LabelComponent;
 
-@Entity(name="label_labeldelta")
-@Table(name="label_labeldelta")
+@Entity(name = "label_labeldelta")
+@Table(name = "label_labeldelta")
 public class LabelImpl extends LabelDecorator {
 
 	public LabelImpl() {
-        super();
+		super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
-        this.objectName = LabelImpl.class.getName();
-    }
+		this.idLabel = Math.abs(r.nextInt());
+		this.objectName = LabelImpl.class.getName();
+	}
 
 	public LabelImpl(LabelComponent record) {
 		super(record, LabelImpl.class.getName());
 		this.objectName = LabelImpl.class.getName();
 	}
 
-
-
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> map = record.toHashMap();
-        map.put("idLabel", idLabel);
+		HashMap<String, Object> map = record.toHashMap();
+		map.put("idLabel", idLabel);
 
-        return map;
-    }
+		return map;
+	}
 
 }

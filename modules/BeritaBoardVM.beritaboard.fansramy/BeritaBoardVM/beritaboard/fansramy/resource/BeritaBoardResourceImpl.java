@@ -40,7 +40,7 @@ public class BeritaBoardResourceImpl extends BeritaBoardResourceDecorator {
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public BeritaBoard createBeritaBoard(VMJExchange vmjExchange, UUID id){
+    public BeritaBoard createBeritaBoard(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			BeritaBoard result = beritaboardfansramyServiceImpl.createBeritaBoard(requestBody, id);

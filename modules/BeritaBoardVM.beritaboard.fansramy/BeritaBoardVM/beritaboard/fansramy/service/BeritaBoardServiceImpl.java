@@ -32,7 +32,7 @@ public class BeritaBoardServiceImpl extends BeritaBoardServiceDecorator {
 		String beritaidStr = (String) requestBody.get("beritaid");
 		int beritaid = Integer.parseInt(beritaidStr);
 		String content = (String) requestBody.get("content");
-		UUID recordBeritaBoardBeritaid = ((BeritaBoardDecorator) savedBeritaBoard).getBeritaid();
+		int recordBeritaBoardBeritaid = ((BeritaBoardDecorator) savedBeritaBoard).getBeritaid();
 		BeritaBoard BeritaBoard = record.createBeritaBoard(requestBody, recordBeritaBoardBeritaid);
 		BeritaBoard beritaboardfansramy = BeritaBoardFactory.createBeritaBoard("BeritaBoardVM.beritaboard.fansramy.model.BeritaBoardImpl", BeritaBoard, beritaid, content);
 		return beritaboardfansramy;
@@ -40,6 +40,7 @@ public class BeritaBoardServiceImpl extends BeritaBoardServiceDecorator {
 
     public HashMap<String, Object> updateBeritaBoard(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("beritaid");
+		int id = Integer.parseInt(idStr);
 		
 		BeritaBoard beritaboardfansramy = Repository.getObject(id);
 		beritaboardfansramy = createBeritaBoard(requestBody, id);
