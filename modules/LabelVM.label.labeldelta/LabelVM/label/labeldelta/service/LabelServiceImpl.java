@@ -34,7 +34,7 @@ public class LabelServiceImpl extends LabelServiceDecorator {
 		int idLabel = Integer.parseInt(idLabelStr);
 		String name = (String) requestBody.get("name");
 		String description = (String) requestBody.get("description");
-		UUID recordLabelIdLabel = ((LabelDecorator) savedLabel).getIdLabel();
+		int recordLabelIdLabel = ((LabelDecorator) savedLabel).getIdLabel();
 		Label Label = record.createLabel(requestBody, recordLabelIdLabel);
 		Label labellabeldelta = LabelFactory.createLabel("LabelVM.label.labeldelta.model.LabelImpl", Label, idLabel, name, description);
 		return labellabeldelta;
@@ -42,6 +42,7 @@ public class LabelServiceImpl extends LabelServiceDecorator {
 
     public HashMap<String, Object> updateLabel(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idLabel");
+		int id = Integer.parseInt(idStr);
 		
 		Label labellabeldelta = Repository.getObject(id);
 		labellabeldelta = createLabel(requestBody, id);

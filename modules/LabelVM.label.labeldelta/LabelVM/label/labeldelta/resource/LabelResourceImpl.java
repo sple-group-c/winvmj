@@ -40,7 +40,7 @@ public class LabelResourceImpl extends LabelResourceDecorator {
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Label createLabel(VMJExchange vmjExchange, UUID id){
+    public Label createLabel(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Label result = labellabeldeltaServiceImpl.createLabel(requestBody, id);
