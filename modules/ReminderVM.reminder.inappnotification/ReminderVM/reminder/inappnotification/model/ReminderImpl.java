@@ -1,4 +1,4 @@
-package ReminderVM.reminder.reminderdelta.model;
+package ReminderVM.reminder.inappnotification.model;
 
 import java.util.*;
 import java.lang.*;
@@ -13,27 +13,29 @@ import ReminderVM.reminder.core.model.ReminderDecorator;
 import ReminderVM.reminder.core.model.Reminder;
 import ReminderVM.reminder.core.model.ReminderComponent;
 
-@Entity(name = "reminder_reminderdelta")
-@Table(name = "reminder_reminderdelta")
+@Entity(name="reminder_inappnotification")
+@Table(name="reminder_inappnotification")
 public class ReminderImpl extends ReminderDecorator {
 
 	public ReminderImpl() {
-		super();
+        super();
 		Random r = new Random();
-		this.idReminder = Math.abs(r.nextInt());
-		this.objectName = ReminderImpl.class.getName();
-	}
+		this. = Math.abs(r.nextInt());
+        this.objectName = ReminderImpl.class.getName();
+    }
 
 	public ReminderImpl(ReminderComponent record) {
 		super(record, ReminderImpl.class.getName());
 		this.objectName = ReminderImpl.class.getName();
 	}
 
-	public HashMap<String, Object> toHashMap() {
-		HashMap<String, Object> map = record.toHashMap();
-		map.put("idReminder", idReminder);
 
-		return map;
-	}
+
+	public HashMap<String, Object> toHashMap() {
+        HashMap<String, Object> map = record.toHashMap();
+        map.put("idReminder", idReminder);
+
+        return map;
+    }
 
 }
