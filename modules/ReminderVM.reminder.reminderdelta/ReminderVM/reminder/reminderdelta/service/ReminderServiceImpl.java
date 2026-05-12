@@ -38,7 +38,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
 		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
 		String timeTrigger = (String) requestBody.get("timeTrigger");
-		UUID recordReminderIdReminder = ((ReminderDecorator) savedReminder).getIdReminder();
+		int recordReminderIdReminder = ((ReminderDecorator) savedReminder).getIdReminder();
 		Reminder Reminder = record.createReminder(requestBody, recordReminderIdReminder);
 		Reminder reminderreminderdelta = ReminderFactory.createReminder("ReminderVM.reminder.reminderdelta.model.ReminderImpl", Reminder, idReminder, isDisabled, resendIntervalMin, timeTrigger);
 		return reminderreminderdelta;
@@ -46,6 +46,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 
     public HashMap<String, Object> updateReminder(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idReminder");
+		int id = Integer.parseInt(idStr);
 		
 		Reminder reminderreminderdelta = Repository.getObject(id);
 		reminderreminderdelta = createReminder(requestBody, id);

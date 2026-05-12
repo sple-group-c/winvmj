@@ -36,7 +36,7 @@ public class TaskManagementServiceImpl extends TaskManagementServiceDecorator {
 		String title = (String) requestBody.get("title");
 		String description = (String) requestBody.get("description");
 		String status = (String) requestBody.get("status");
-		UUID recordTaskManagementIdTask = ((TaskManagementDecorator) savedTaskManagement).getIdTask();
+		int recordTaskManagementIdTask = ((TaskManagementDecorator) savedTaskManagement).getIdTask();
 		TaskManagement TaskManagement = record.createTaskManagement(requestBody, recordTaskManagementIdTask);
 		TaskManagement taskmanagementtaskdelta = TaskManagementFactory.createTaskManagement("TaskManagementVM.taskmanagement.taskdelta.model.TaskManagementImpl", TaskManagement, idTask, title, description, status);
 		return taskmanagementtaskdelta;
@@ -44,6 +44,7 @@ public class TaskManagementServiceImpl extends TaskManagementServiceDecorator {
 
     public HashMap<String, Object> updateTaskManagement(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idTask");
+		int id = Integer.parseInt(idStr);
 		
 		TaskManagement taskmanagementtaskdelta = Repository.getObject(id);
 		taskmanagementtaskdelta = createTaskManagement(requestBody, id);

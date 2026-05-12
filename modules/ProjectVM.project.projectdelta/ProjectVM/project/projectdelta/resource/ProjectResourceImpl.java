@@ -40,7 +40,7 @@ public class ProjectResourceImpl extends ProjectResourceDecorator {
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Project createProject(VMJExchange vmjExchange, UUID id){
+    public Project createProject(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Project result = projectprojectdeltaServiceImpl.createProject(requestBody, id);

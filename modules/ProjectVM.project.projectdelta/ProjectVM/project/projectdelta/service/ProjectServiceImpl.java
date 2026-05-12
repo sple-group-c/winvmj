@@ -34,7 +34,7 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
 		int idProject = Integer.parseInt(idProjectStr);
 		String name = (String) requestBody.get("name");
 		String description = (String) requestBody.get("description");
-		UUID recordProjectIdProject = ((ProjectDecorator) savedProject).getIdProject();
+		int recordProjectIdProject = ((ProjectDecorator) savedProject).getIdProject();
 		Project Project = record.createProject(requestBody, recordProjectIdProject);
 		Project projectprojectdelta = ProjectFactory.createProject("ProjectVM.project.projectdelta.model.ProjectImpl", Project, idProject, name, description);
 		return projectprojectdelta;
@@ -42,6 +42,7 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
 
     public HashMap<String, Object> updateProject(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idProject");
+		int id = Integer.parseInt(idStr);
 		
 		Project projectprojectdelta = Repository.getObject(id);
 		projectprojectdelta = createProject(requestBody, id);
