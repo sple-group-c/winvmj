@@ -13,29 +13,27 @@ import TaskManagementVM.taskmanagement.core.model.TaskManagementDecorator;
 import TaskManagementVM.taskmanagement.core.model.TaskManagement;
 import TaskManagementVM.taskmanagement.core.model.TaskManagementComponent;
 
-@Entity(name="taskmanagement_taskdelta")
-@Table(name="taskmanagement_taskdelta")
+@Entity(name = "taskmanagement_taskdelta")
+@Table(name = "taskmanagement_taskdelta")
 public class TaskManagementImpl extends TaskManagementDecorator {
 
 	public TaskManagementImpl() {
-        super();
+		super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
-        this.objectName = TaskManagementImpl.class.getName();
-    }
+		this.idTask = Math.abs(r.nextInt());
+		this.objectName = TaskManagementImpl.class.getName();
+	}
 
 	public TaskManagementImpl(TaskManagementComponent record) {
 		super(record, TaskManagementImpl.class.getName());
 		this.objectName = TaskManagementImpl.class.getName();
 	}
 
-
-
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> map = record.toHashMap();
-        map.put("idTask", idTask);
+		HashMap<String, Object> map = record.toHashMap();
+		map.put("idTask", idTask);
 
-        return map;
-    }
+		return map;
+	}
 
 }

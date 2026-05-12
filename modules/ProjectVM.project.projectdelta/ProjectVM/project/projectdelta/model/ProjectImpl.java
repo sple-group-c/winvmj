@@ -13,29 +13,27 @@ import ProjectVM.project.core.model.ProjectDecorator;
 import ProjectVM.project.core.model.Project;
 import ProjectVM.project.core.model.ProjectComponent;
 
-@Entity(name="project_projectdelta")
-@Table(name="project_projectdelta")
+@Entity(name = "project_projectdelta")
+@Table(name = "project_projectdelta")
 public class ProjectImpl extends ProjectDecorator {
 
 	public ProjectImpl() {
-        super();
+		super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
-        this.objectName = ProjectImpl.class.getName();
-    }
+		this.idProject = Math.abs(r.nextInt());
+		this.objectName = ProjectImpl.class.getName();
+	}
 
 	public ProjectImpl(ProjectComponent record) {
 		super(record, ProjectImpl.class.getName());
 		this.objectName = ProjectImpl.class.getName();
 	}
 
-
-
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> map = record.toHashMap();
-        map.put("idProject", idProject);
+		HashMap<String, Object> map = record.toHashMap();
+		map.put("idProject", idProject);
 
-        return map;
-    }
+		return map;
+	}
 
 }

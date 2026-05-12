@@ -14,9 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-@Entity(name="beritaboard_impl")
-@Table(name="beritaboard_impl")
+@Entity(name = "beritaboard_impl")
+@Table(name = "beritaboard_impl")
 public class BeritaBoardImpl extends BeritaBoardComponent {
 
 	public BeritaBoardImpl(int beritaid, String content) {
@@ -30,7 +29,8 @@ public class BeritaBoardImpl extends BeritaBoardComponent {
 		this.content = content;
 	}
 
-	public BeritaBoardImpl() { }
+	public BeritaBoardImpl() {
+	}
 
 	public int getBeritaid() {
 		return this.beritaid;
@@ -39,6 +39,7 @@ public class BeritaBoardImpl extends BeritaBoardComponent {
 	public void setBeritaid(int beritaid) {
 		this.beritaid = beritaid;
 	}
+
 	public String getContent() {
 		return this.content;
 	}
@@ -47,13 +48,12 @@ public class BeritaBoardImpl extends BeritaBoardComponent {
 		this.content = content;
 	}
 
-	
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> beritaboardMap = new HashMap<String,Object>();
-		beritaboardMap.put("beritaid",getBeritaid());
-		beritaboardMap.put("content",getContent());
+		HashMap<String, Object> beritaboardMap = new HashMap<String, Object>();
+		beritaboardMap.put("beritaid", getBeritaid());
+		beritaboardMap.put("content", getContent());
 
-        return beritaboardMap;
-    }
+		return beritaboardMap;
+	}
 
 }

@@ -14,9 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-
-@Entity(name="reminder_impl")
-@Table(name="reminder_impl")
+@Entity(name = "reminder_impl")
+@Table(name = "reminder_impl")
 public class ReminderImpl extends ReminderComponent {
 
 	public ReminderImpl(int idReminder, String isDisabled, int resendIntervalMin, String timeTrigger) {
@@ -34,7 +33,8 @@ public class ReminderImpl extends ReminderComponent {
 		this.timeTrigger = timeTrigger;
 	}
 
-	public ReminderImpl() { }
+	public ReminderImpl() {
+	}
 
 	public int getIdReminder() {
 		return this.idReminder;
@@ -43,6 +43,7 @@ public class ReminderImpl extends ReminderComponent {
 	public void setIdReminder(int idReminder) {
 		this.idReminder = idReminder;
 	}
+
 	public String getIsDisabled() {
 		return this.isDisabled;
 	}
@@ -50,6 +51,7 @@ public class ReminderImpl extends ReminderComponent {
 	public void setIsDisabled(String isDisabled) {
 		this.isDisabled = isDisabled;
 	}
+
 	public int getResendIntervalMin() {
 		return this.resendIntervalMin;
 	}
@@ -57,6 +59,7 @@ public class ReminderImpl extends ReminderComponent {
 	public void setResendIntervalMin(int resendIntervalMin) {
 		this.resendIntervalMin = resendIntervalMin;
 	}
+
 	public String getTimeTrigger() {
 		return this.timeTrigger;
 	}
@@ -65,15 +68,14 @@ public class ReminderImpl extends ReminderComponent {
 		this.timeTrigger = timeTrigger;
 	}
 
-	
 	public HashMap<String, Object> toHashMap() {
-        HashMap<String, Object> reminderMap = new HashMap<String,Object>();
-		reminderMap.put("idReminder",getIdReminder());
-		reminderMap.put("isDisabled",getIsDisabled());
-		reminderMap.put("resendIntervalMin",getResendIntervalMin());
-		reminderMap.put("timeTrigger",getTimeTrigger());
+		HashMap<String, Object> reminderMap = new HashMap<String, Object>();
+		reminderMap.put("idReminder", getIdReminder());
+		reminderMap.put("isDisabled", getIsDisabled());
+		reminderMap.put("resendIntervalMin", getResendIntervalMin());
+		reminderMap.put("timeTrigger", getTimeTrigger());
 
-        return reminderMap;
-    }
+		return reminderMap;
+	}
 
 }
