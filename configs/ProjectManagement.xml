@@ -2,9 +2,10 @@
 <configuration>
 	<feature automatic="selected" name="SchedulingManagementSystem"/>
 	<feature automatic="selected" name="TaskManagement"/>
-	<feature manual="selected" name="Project"/>
+	<feature automatic="selected" name="Project"/>
 	<feature automatic="selected" name="Label"/>
 	<feature automatic="unselected" name="BeritaBoard"/>
 	<feature manual="selected" name="Reminder"/>
-	<feature name="MeetingManagement"/>
+	<feature automatic="selected" name="MeetingManagement"/>
+	<feature manual="selected" name="ProjectMeeting"/>
 </configuration>

@@ -7,4 +7,5 @@
 	<feature automatic="unselected" name="BeritaBoard"/>
 	<feature manual="selected" name="Reminder"/>
 	<feature name="MeetingManagement"/>
+	<feature name="ProjectMeeting"/>
 </configuration>

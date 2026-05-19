@@ -10,18 +10,19 @@
 			<arguments>
 				<dictionary>
 					<key>build</key>
-					<value></value>
+					<value>src</value>
 				</dictionary>
 				<dictionary>
 					<key>composer</key>
+					<value>de.ovgu.featureide.core.winvmj.composer</value>
 				</dictionary>
 				<dictionary>
 					<key>equations</key>
-					<value></value>
+					<value>configs</value>
 				</dictionary>
 				<dictionary>
 					<key>source</key>
-					<value></value>
+					<value>src</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>

@@ -4,5 +4,6 @@
     "Reminder":["ReminderVM.reminder.core"],
     "Label":["LabelVM.label.core"],
     "BeritaBoard":["BeritaBoardVM.beritaboard.core"],
-    "MeetingManagement":["MeetingManagementVM.meetingmanagement.core"]
+    "MeetingManagement":["MeetingManagementVM.meetingmanagement.core"],
+    "ProjectMeeting": ["MeetingManagementVM.meetingmanagement.projectmeetingdelta"]
 }

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<feature name="FinalTest"/>
-	<feature name="Base"/>
+	<feature name="SchedulingManagementSystem"/>
+	<feature name="TaskManagement"/>
+	<feature name="Project"/>
+	<feature name="Label"/>
+	<feature name="BeritaBoard"/>
+	<feature name="Reminder"/>
+	<feature name="MeetingManagement"/>
+	<feature name="ProjectMeeting"/>
 </configuration>
