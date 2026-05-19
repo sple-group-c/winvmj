@@ -12,6 +12,8 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementDecorat
 import ProjectVM.project.core.model.Project;
 import ProjectVM.project.core.model.ProjectComponent;
 
+import ProjectVM.project.core.Project;
+
 @Entity(name="meetingmanagement_projectmeetingdelta")
 @Table(name="meetingmanagement_projectmeetingdelta")
 public class MeetingManagementImpl extends MeetingManagementDecorator {

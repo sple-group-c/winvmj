@@ -13,6 +13,10 @@ import ProjectVM.project.core.model.Project;
 import ProjectVM.project.core.model.ProjectComponent;
 import MeetingManagementVM.meetingmanagement.projectmeetingdelta.model.MeetingManagementImpl;
 
+import ProjectVM.project.core.model.Project;
+import ProjectVM.project.core.model.ProjectComponent;
+
+
 public class MeetingManagementServiceImpl extends MeetingManagementServiceDecorator {
 	private final RepositoryUtil<Project> projectRepository;
 
@@ -29,6 +33,7 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 				meetingmanagementprojectmeetingdelta,
 				project);
 		Repository.saveObject(meetingmanagementprojectmeetingdeltadeco);
+		
 		return meetingmanagementprojectmeetingdeltadeco;
 	}
 
