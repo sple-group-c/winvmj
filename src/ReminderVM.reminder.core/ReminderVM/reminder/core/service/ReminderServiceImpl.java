@@ -23,17 +23,16 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class ReminderServiceImpl extends ReminderServiceComponent{
 
     public Reminder createReminder(Map<String, Object> requestBody){
-		Object isDisabledRaw = requestBody.get("isDisabled");
-		boolean isDisabled = isDisabledRaw != null && (boolean) isDisabledRaw;
+		boolean isDisabled = Boolean.parseBoolean((String) requestBody.get("isDisabled"));
 		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
 		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
 		int minute = Integer.parseInt(minuteStr);
-		
+
 		//to do: fix association attributes
-		
+
 		Reminder reminder = ReminderFactory.createReminder("ReminderVM.reminder.core.model.ReminderImpl", isDisabled, resendIntervalMin, hour, minute);
 		Repository.saveObject(reminder);
 		return reminder;
@@ -41,8 +40,7 @@ public class ReminderServiceImpl extends ReminderServiceComponent{
 
 	public Reminder createReminder(Map<String, Object> requestBody, int id){
 		int idReminder = id;
-		Object isDisabledRaw = requestBody.get("isDisabled");
-		boolean isDisabled = isDisabledRaw != null && (boolean) isDisabledRaw;
+		boolean isDisabled = Boolean.parseBoolean((String) requestBody.get("isDisabled"));
 		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
 		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
 		String hourStr = (String) requestBody.get("hour");
@@ -61,8 +59,7 @@ public class ReminderServiceImpl extends ReminderServiceComponent{
 		int id = Integer.parseInt(idStr);
 		Reminder reminder = Repository.getObject(id);
 		
-		Object isDisabledRaw = requestBody.get("isDisabled");
-		reminder.setIsDisabled(isDisabledRaw != null && (boolean) isDisabledRaw);
+		reminder.setIsDisabled(Boolean.parseBoolean((String) requestBody.get("isDisabled")));
 		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
 		reminder.setResendIntervalMin(Integer.parseInt(resendIntervalMinStr));
 		

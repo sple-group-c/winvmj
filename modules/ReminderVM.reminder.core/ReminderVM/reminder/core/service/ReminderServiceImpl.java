@@ -23,7 +23,7 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class ReminderServiceImpl extends ReminderServiceComponent{
 
     public Reminder createReminder(Map<String, Object> requestBody){
-		boolean isDisabled = (boolean) requestBody.get("isDisabled");
+		boolean isDisabled = Boolean.parseBoolean((String) requestBody.get("isDisabled"));
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
@@ -40,7 +40,7 @@ public class ReminderServiceImpl extends ReminderServiceComponent{
 
 	public Reminder createReminder(Map<String, Object> requestBody, int id){
 		int idReminder = id;
-		boolean isDisabled = (boolean) requestBody.get("isDisabled");
+		boolean isDisabled = Boolean.parseBoolean((String) requestBody.get("isDisabled"));
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
