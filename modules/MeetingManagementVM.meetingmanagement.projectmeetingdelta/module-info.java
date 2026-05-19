@@ -1,5 +1,7 @@
 module MeetingManagementVM.meetingmanagement.projectmeetingdelta {
 	requires MeetingManagementVM.meetingmanagement.core;
+	requires ProjectVM.project.core;
+
 	exports MeetingManagementVM.meetingmanagement.projectmeetingdelta.model;
 	exports MeetingManagementVM.meetingmanagement.projectmeetingdelta.resource;
 	exports MeetingManagementVM.meetingmanagement.projectmeetingdelta.service;

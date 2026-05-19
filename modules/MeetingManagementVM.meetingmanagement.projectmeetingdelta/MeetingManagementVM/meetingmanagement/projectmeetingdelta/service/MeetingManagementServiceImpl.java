@@ -4,6 +4,8 @@ import java.util.*;
 import java.lang.*;
 
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
+import id.ac.ui.cs.prices.winvmj.hibernate.RepositoryUtil;
+
 
 import MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceDecorator;
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementImpl;
@@ -12,21 +14,36 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagement;
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementDecorator;
 import MeetingManagementVM.meetingmanagement.MeetingManagementFactory;
 
+import ProjectVM.project.core.model.Project;
+import ProjectVM.project.core.model.ProjectComponent;
+
+
 public class MeetingManagementServiceImpl extends MeetingManagementServiceDecorator {
+	protected RepositoryUtil<Project> projectRepository;
+
     public MeetingManagementServiceImpl (MeetingManagementServiceComponent record) {
+		this.projectRepository = new RepositoryUtil<Project>(ProjectVM.project.core.model.ProjectComponent)
         super(record);
     }
 
  	public MeetingManagement createMeetingManagement(Map<String, Object> requestBody){
 		String idMeetingStr = (String) requestBody.get("idMeeting");
+		String idProjectStr = (String) requestBody.get("idProject");
+
 		int idMeeting = Integer.parseInt(idMeetingStr);
+		int idProject = Integer.parseInt(idProjectStr);
+
 		String name = (String) requestBody.get("name");
 		String startDate = (String) requestBody.get("startDate");
 		String endDate = (String) requestBody.get("endDate");
 		String location = (String) requestBody.get("location");
+
+		Project project = this.projectRepository.getObject(idProject);
+
 		MeetingManagement meetingmanagementprojectmeetingdelta = record.createMeetingManagement(requestBody);
-		MeetingManagement meetingmanagementprojectmeetingdeltadeco = MeetingManagementFactory.createMeetingManagement("MeetingManagementVM.meetingmanagement.projectmeetingdelta", meetingmanagementprojectmeetingdelta, idMeeting, name, startDate, endDate, location, project);
+		MeetingManagement meetingmanagementprojectmeetingdeltadeco = MeetingManagementFactory.createMeetingManagement("MeetingManagementVM.meetingmanagement.projectmeetingdelta", meetingmanagementprojectmeetingdelta, project);
 		Repository.saveObject(meetingmanagementprojectmeetingdeltadeco);
+		
 		return meetingmanagementprojectmeetingdeltadeco;
 	}
 
@@ -38,7 +55,7 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 		String startDate = (String) requestBody.get("startDate");
 		String endDate = (String) requestBody.get("endDate");
 		String location = (String) requestBody.get("location");
-		UUID recordMeetingManagementIdMeeting = ((MeetingManagementDecorator) savedMeetingManagement).getIdMeeting();
+		int recordMeetingManagementIdMeeting = ((MeetingManagementDecorator) savedMeetingManagement).getIdMeeting();
 		MeetingManagement MeetingManagement = record.createMeetingManagement(requestBody, recordMeetingManagementIdMeeting);
 		MeetingManagement meetingmanagementprojectmeetingdelta = MeetingManagementFactory.createMeetingManagement("MeetingManagementVM.meetingmanagement.projectmeetingdelta.model.MeetingManagementImpl", MeetingManagement, idMeeting, name, startDate, endDate, location, project);
 		return meetingmanagementprojectmeetingdelta;

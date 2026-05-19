@@ -13,19 +13,23 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementDecorat
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagement;
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementComponent;
 
+import ProjectVM.project.core.Project;
+
 @Entity(name="meetingmanagement_projectmeetingdelta")
 @Table(name="meetingmanagement_projectmeetingdelta")
 public class MeetingManagementImpl extends MeetingManagementDecorator {
 
+	
 	protected Project project;
+	
 	public MeetingManagementImpl() {
         super();
 		Random r = new Random();
-		this. = Math.abs(r.nextInt());
+		this.idMeeting = Math.abs(r.nextInt());
         this.objectName = MeetingManagementImpl.class.getName();
     }
 
-	public MeetingManagementImpl(MeetingManagementComponent record, Project project, Project Project) {
+	public MeetingManagementImpl(MeetingManagementComponent record, Project project) {
 		super(record, MeetingManagementImpl.class.getName());
 		this.project = project;
 		this.objectName = MeetingManagementImpl.class.getName();
