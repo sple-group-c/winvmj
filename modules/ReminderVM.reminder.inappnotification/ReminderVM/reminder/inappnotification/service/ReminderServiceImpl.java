@@ -44,7 +44,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
 		int minute = Integer.parseInt(minuteStr);
-		UUID recordReminderIdReminder = ((ReminderDecorator) savedReminder).getIdReminder();
+		int recordReminderIdReminder = ((ReminderDecorator) savedReminder).getIdReminder();
 		Reminder Reminder = record.createReminder(requestBody, recordReminderIdReminder);
 		Reminder reminderinappnotification = ReminderFactory.createReminder("ReminderVM.reminder.inappnotification.model.ReminderImpl", Reminder, idReminder, isDisabled, resendIntervalMin, hour, minute);
 		return reminderinappnotification;
@@ -52,6 +52,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 
     public HashMap<String, Object> updateReminder(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idReminder");
+		int id = Integer.parseInt(idStr);
 		
 		Reminder reminderinappnotification = Repository.getObject(id);
 		reminderinappnotification = createReminder(requestBody, id);

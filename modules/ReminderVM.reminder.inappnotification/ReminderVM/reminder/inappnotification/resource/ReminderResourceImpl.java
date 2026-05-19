@@ -40,7 +40,7 @@ public class ReminderResourceImpl extends ReminderResourceDecorator {
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Reminder createReminder(VMJExchange vmjExchange, UUID id){
+    public Reminder createReminder(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Reminder result = reminderinappnotificationServiceImpl.createReminder(requestBody, id);
