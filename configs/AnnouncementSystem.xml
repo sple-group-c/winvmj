@@ -3,6 +3,7 @@
 	<feature automatic="selected" name="SchedulingManagementSystem"/>
 	<feature automatic="selected" name="TaskManagement"/>
 	<feature automatic="unselected" name="Project"/>
+	<feature name="ProgrammingProject"/>
 	<feature automatic="unselected" name="Label"/>
 	<feature manual="selected" name="BeritaBoard"/>
 	<feature automatic="unselected" name="Reminder"/>

@@ -6,6 +6,8 @@ features
 			TaskManagement
 		optional
 			Project
+				optional
+					ProgrammingProject
 			Label
 			BeritaBoard
 			Reminder
