@@ -7,17 +7,17 @@ import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
 
 import MeetingManagementVM.meetingmanagement.core.resource.MeetingManagementResourceDecorator;
 import MeetingManagementVM.meetingmanagement.core.resource.MeetingManagementResourceComponent;
+import MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceComponent;
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagement;
 import MeetingManagementVM.meetingmanagement.projectmeetingdelta.service.MeetingManagementServiceImpl;
 
 public class MeetingManagementResourceImpl extends MeetingManagementResourceDecorator {
 	private MeetingManagementServiceImpl meetingmanagementprojectmeetingdeltaServiceImpl;
 
-    public MeetingManagementResourceImpl (MeetingManagementResourceComponent record) {
+    public MeetingManagementResourceImpl(MeetingManagementResourceComponent record, MeetingManagementServiceComponent service) {
         super(record);
-        this.meetingmanagementprojectmeetingdeltaServiceImpl = new MeetingManagementServiceImpl(new MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceImpl());
+        this.meetingmanagementprojectmeetingdeltaServiceImpl = new MeetingManagementServiceImpl(service);
     }
-
     
     @Route(url="call/projectmeetingdelta/save")
     public List<HashMap<String,Object>> saveMeetingManagement(VMJExchange vmjExchange){
