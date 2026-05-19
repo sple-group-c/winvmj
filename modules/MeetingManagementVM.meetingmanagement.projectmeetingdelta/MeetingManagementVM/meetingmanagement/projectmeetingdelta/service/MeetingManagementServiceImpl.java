@@ -9,10 +9,7 @@ import MeetingManagementVM.meetingmanagement.core.model.MeetingManagement;
 import MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceComponent;
 import MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceDecorator;
 
-import ProjectVM.project.core.model.Project;
-import ProjectVM.project.core.model.ProjectComponent;
 import MeetingManagementVM.meetingmanagement.projectmeetingdelta.model.MeetingManagementImpl;
-
 import ProjectVM.project.core.model.Project;
 import ProjectVM.project.core.model.ProjectComponent;
 
@@ -61,18 +58,17 @@ public class MeetingManagementServiceImpl extends MeetingManagementServiceDecora
 			throw new IllegalArgumentException("Not found");
 		}
 
-		meetingmanagement.setName((String) requestBody.get("name"));
-		meetingmanagement.setStartDate((String) requestBody.get("startDate"));
-		meetingmanagement.setEndDate((String) requestBody.get("endDate"));
-		meetingmanagement.setLocation((String) requestBody.get("location"));
-
-		Project project = this.getProjectFromRequest(requestBody);
 		if (!(meetingmanagement instanceof MeetingManagementImpl)) {
 			throw new IllegalArgumentException(
 					"MeetingManagement with idMeeting " + id + " is not a projectmeetingdelta record");
 		}
 
+		Project project = this.getProjectFromRequest(requestBody);
 		MeetingManagementImpl meetingmanagementprojectmeetingdelta = (MeetingManagementImpl) meetingmanagement;
+		meetingmanagementprojectmeetingdelta.setName((String) requestBody.get("name"));
+		meetingmanagementprojectmeetingdelta.setStartDate((String) requestBody.get("startDate"));
+		meetingmanagementprojectmeetingdelta.setEndDate((String) requestBody.get("endDate"));
+		meetingmanagementprojectmeetingdelta.setLocation((String) requestBody.get("location"));
 		meetingmanagementprojectmeetingdelta.setProject(project);
 
 		Repository.updateObject(meetingmanagementprojectmeetingdelta);
