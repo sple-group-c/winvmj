@@ -3,6 +3,7 @@
     "Project":["ProjectVM.project.core"],
     "Reminder":["ReminderVM.reminder.core"],
     "Label":["LabelVM.label.core"],
+    "LabelDelta": ["LabelVM.label.labeldelta"],
     "BeritaBoard":["BeritaBoardVM.beritaboard.core"],
     "MeetingManagement":["MeetingManagementVM.meetingmanagement.core"]
 }
