@@ -1,5 +1,7 @@
 module MeetingManagementVM.meetingmanagement.projectmeetingdelta {
 	requires MeetingManagementVM.meetingmanagement.core;
+	requires ProjectVM.project.core;
+
 	exports MeetingManagementVM.meetingmanagement.projectmeetingdelta.model;
 	exports MeetingManagementVM.meetingmanagement.projectmeetingdelta.resource;
 	exports MeetingManagementVM.meetingmanagement.projectmeetingdelta.service;
@@ -12,5 +14,6 @@ module MeetingManagementVM.meetingmanagement.projectmeetingdelta {
 	requires java.naming;
 	requires java.net.http;
 
-	opens MeetingManagementVM.meetingmanagement.projectmeetingdelta.model to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
+	opens MeetingManagementVM.meetingmanagement.projectmeetingdelta.model
+			to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
 }

@@ -1,6 +1,5 @@
 package MeetingManagementVM.meetingmanagement.projectmeetingdelta.resource;
 import java.util.*;
-import java.lang.*;
 
 import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
@@ -9,16 +8,14 @@ import id.ac.ui.cs.prices.winvmj.core.exceptions.*;
 import MeetingManagementVM.meetingmanagement.core.resource.MeetingManagementResourceDecorator;
 import MeetingManagementVM.meetingmanagement.core.resource.MeetingManagementResourceComponent;
 import MeetingManagementVM.meetingmanagement.core.model.MeetingManagement;
-import MeetingManagementVM.meetingmanagement.core.model.MeetingManagementImpl;
-import MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceComponent;
 import MeetingManagementVM.meetingmanagement.projectmeetingdelta.service.MeetingManagementServiceImpl;
 
 public class MeetingManagementResourceImpl extends MeetingManagementResourceDecorator {
-	protected MeetingManagementServiceComponent recordComponent;
-	private MeetingManagementServiceImpl meetingmanagementprojectmeetingdeltaServiceImpl = new MeetingManagementServiceImpl(recordComponent);
+	private MeetingManagementServiceImpl meetingmanagementprojectmeetingdeltaServiceImpl;
 
     public MeetingManagementResourceImpl (MeetingManagementResourceComponent record) {
         super(record);
+        this.meetingmanagementprojectmeetingdeltaServiceImpl = new MeetingManagementServiceImpl(new MeetingManagementVM.meetingmanagement.core.service.MeetingManagementServiceImpl());
     }
 
     
@@ -40,7 +37,7 @@ public class MeetingManagementResourceImpl extends MeetingManagementResourceDeco
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public MeetingManagement createMeetingManagement(VMJExchange vmjExchange, UUID id){
+    public MeetingManagement createMeetingManagement(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			MeetingManagement result = meetingmanagementprojectmeetingdeltaServiceImpl.createMeetingManagement(requestBody, id);
@@ -62,7 +59,8 @@ public class MeetingManagementResourceImpl extends MeetingManagementResourceDeco
 	
     @Route(url="call/projectmeetingdelta/detail")
     public HashMap<String, Object> getMeetingManagement(VMJExchange vmjExchange){
-		return record.getMeetingManagement(vmjExchange);
+		String idStr = vmjExchange.getGETParam("idMeeting");
+		return meetingmanagementprojectmeetingdeltaServiceImpl.getMeetingManagement(idStr);
 	}
 
 	
