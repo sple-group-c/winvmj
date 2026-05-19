@@ -1,4 +1,4 @@
-package ReminderVM.reminder.inappnotification.model;
+package ReminderVM.reminder.emailreminder.model;
 
 import java.util.*;
 import java.lang.*;
@@ -13,10 +13,11 @@ import ReminderVM.reminder.core.model.ReminderDecorator;
 import ReminderVM.reminder.core.model.Reminder;
 import ReminderVM.reminder.core.model.ReminderComponent;
 
-@Entity(name="reminder_inappnotification")
-@Table(name="reminder_inappnotification")
+@Entity(name="reminder_emailreminder")
+@Table(name="reminder_emailreminder")
 public class ReminderImpl extends ReminderDecorator {
 
+	protected String email;
 	public ReminderImpl() {
         super();
 		Random r = new Random();
@@ -24,16 +25,29 @@ public class ReminderImpl extends ReminderDecorator {
         this.objectName = ReminderImpl.class.getName();
     }
 
-	public ReminderImpl(ReminderComponent record) {
+	public ReminderImpl(ReminderComponent record, String email) {
 		super(record, ReminderImpl.class.getName());
+		this.email = email;
 		this.objectName = ReminderImpl.class.getName();
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void sendsEmail(String emailAddress) {
+		// TODO: implement this method
+		throw new UnsupportedOperationException();
+	}
 
 	public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> map = record.toHashMap();
         map.put("idReminder", idReminder);
+		map.put("email", getEmail());
 
         return map;
     }

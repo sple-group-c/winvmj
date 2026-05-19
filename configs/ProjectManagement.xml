@@ -6,7 +6,8 @@
 	<feature name="ProgrammingProject"/>
 	<feature automatic="selected" name="Label"/>
 	<feature automatic="unselected" name="BeritaBoard"/>
-	<feature manual="selected" name="Reminder"/>
+	<feature automatic="selected" manual="selected" name="Reminder"/>
+	<feature manual="selected" name="EmailReminder"/>
 	<feature automatic="selected" name="MeetingManagement"/>
 	<feature manual="selected" name="ProjectMeeting"/>
 </configuration>

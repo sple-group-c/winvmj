@@ -2,6 +2,7 @@
     "TaskManagement":["TaskManagementVM.taskmanagement.core"],
     "Project":["ProjectVM.project.core"],
     "Reminder":["ReminderVM.reminder.core"],
+    "EmailReminder" :["ReminderVM.reminder.emailreminder"],
     "Label":["LabelVM.label.core"],
     "BeritaBoard":["BeritaBoardVM.beritaboard.core"],
     "MeetingManagement":["MeetingManagementVM.meetingmanagement.core"],

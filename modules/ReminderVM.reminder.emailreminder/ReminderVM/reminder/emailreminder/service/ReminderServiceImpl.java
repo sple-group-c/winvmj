@@ -1,4 +1,4 @@
-package ReminderVM.reminder.inappnotification.service;
+package ReminderVM.reminder.emailreminder.service;
 
 import java.util.*;
 import java.lang.*;
@@ -18,57 +18,48 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
     }
 
  	public Reminder createReminder(Map<String, Object> requestBody){
-		String idReminderStr = (String) requestBody.get("idReminder");
-		int idReminder = Integer.parseInt(idReminderStr);
+		String email = (String) requestBody.get("email");
 		boolean isDisabled = (boolean) requestBody.get("isDisabled");
-		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
-		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
 		int minute = Integer.parseInt(minuteStr);
-		Reminder reminderinappnotification = record.createReminder(requestBody);
-		Reminder reminderinappnotificationdeco = ReminderFactory.createReminder("ReminderVM.reminder.inappnotification", reminderinappnotification, idReminder, isDisabled, resendIntervalMin, hour, minute);
-		Repository.saveObject(reminderinappnotificationdeco);
-		return reminderinappnotificationdeco;
+		String remindingForIdStr = (String) requestBody.get("remindingForId");
+		int remindingForId = Integer.parseInt(remindingForIdStr);
+		Reminder reminderemailreminder = record.createReminder(requestBody);
+		Reminder reminderemailreminderdeco = ReminderFactory.createReminder("ReminderVM.reminder.emailreminder.model.ReminderImpl", reminderemailreminder, email);
+		Repository.saveObject(reminderemailreminderdeco);
+		return reminderemailreminderdeco;
 	}
 
 	public Reminder createReminder(Map<String, Object> requestBody, int id){
 		Reminder savedReminder = Repository.getObject(id);
-		String idReminderStr = (String) requestBody.get("idReminder");
-		int idReminder = Integer.parseInt(idReminderStr);
-		boolean isDisabled = (boolean) requestBody.get("isDisabled");
-		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
-		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
-		String hourStr = (String) requestBody.get("hour");
-		int hour = Integer.parseInt(hourStr);
-		String minuteStr = (String) requestBody.get("minute");
-		int minute = Integer.parseInt(minuteStr);
+		String email = (String) requestBody.get("email");
 		int recordReminderIdReminder = ((ReminderDecorator) savedReminder).getIdReminder();
-		Reminder Reminder = record.createReminder(requestBody, recordReminderIdReminder);
-		Reminder reminderinappnotification = ReminderFactory.createReminder("ReminderVM.reminder.inappnotification.model.ReminderImpl", Reminder, idReminder, isDisabled, resendIntervalMin, hour, minute);
-		return reminderinappnotification;
+		Reminder reminder = record.createReminder(requestBody, recordReminderIdReminder);
+		Reminder reminderemailreminder = ReminderFactory.createReminder("ReminderVM.reminder.emailreminder.ReminderImpl", reminder, email);
+		return reminderemailreminder;
 	}
 
     public HashMap<String, Object> updateReminder(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idReminder");
 		int id = Integer.parseInt(idStr);
+
+		Reminder reminderemailreminder = Repository.getObject(id);
+		reminderemailreminder = createReminder(requestBody, id);
 		
-		Reminder reminderinappnotification = Repository.getObject(id);
-		reminderinappnotification = createReminder(requestBody, id);
-		
-		Repository.updateObject(reminderinappnotification);
-		reminderinappnotification = Repository.getObject(id);
+		Repository.updateObject(reminderemailreminder);
+		reminderemailreminder = Repository.getObject(id);
 		
 		//to do: fix association attributes
 		
-		return reminderinappnotification.toHashMap();
+		return reminderemailreminder.toHashMap();
 	}
 
 	public HashMap<String, Object> getReminder(String idStr){
 		int id = Integer.parseInt(idStr);
-		Reminder reminderinappnotification = Repository.getObject(id);
-		return reminderinappnotification.toHashMap();
+		Reminder reminderemailreminder = Repository.getObject(id);
+		return reminderemailreminder.toHashMap();
 	}
 
 	public HashMap<String, Object> getReminderById(int id){
@@ -83,7 +74,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 	}
 
     public List<HashMap<String,Object>> getAllReminder(){
-		List<Reminder> List = Repository.getAllObject("reminder_inappnotification");
+		List<Reminder> List = Repository.getAllObject("reminder_emailreminder");
 		return transformListToHashMap(List);
 	}
 
@@ -104,4 +95,8 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 	}
 
 	
+	public void sendsEmail(String emailAddress) {
+		// TODO: implement this method
+		throw new UnsupportedOperationException();
+	}
 }

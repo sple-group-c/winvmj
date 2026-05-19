@@ -11,6 +11,8 @@ features
 			Label
 			BeritaBoard
 			Reminder
+				optional
+					EmailReminder
 			MeetingManagement
 				optional
 					ProjectMeeting

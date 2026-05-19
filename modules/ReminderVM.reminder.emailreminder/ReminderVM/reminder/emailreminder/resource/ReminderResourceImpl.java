@@ -1,4 +1,4 @@
-package ReminderVM.reminder.inappnotification.resource;
+package ReminderVM.reminder.emailreminder.resource;
 import java.util.*;
 import java.lang.*;
 
@@ -11,30 +11,30 @@ import ReminderVM.reminder.core.resource.ReminderResourceComponent;
 import ReminderVM.reminder.core.model.Reminder;
 import ReminderVM.reminder.core.model.ReminderImpl;
 import ReminderVM.reminder.core.service.ReminderServiceComponent;
-import ReminderVM.reminder.inappnotification.service.ReminderServiceImpl;
+import ReminderVM.reminder.emailreminder.service.ReminderServiceImpl;
 
 public class ReminderResourceImpl extends ReminderResourceDecorator {
-	protected ReminderServiceComponent recordComponent;
-	private ReminderServiceImpl reminderinappnotificationServiceImpl = new ReminderServiceImpl(recordComponent);
+	private ReminderServiceComponent reminderemailreminderServiceImpl;
 
-    public ReminderResourceImpl (ReminderResourceComponent record) {
+    public ReminderResourceImpl (ReminderResourceComponent record, ReminderServiceComponent recordService) {
         super(record);
+		this.reminderemailreminderServiceImpl = new ReminderServiceImpl(recordService);
     }
 
     
-    @Route(url="call/inappnotification/save")
+    @Route(url="call/emailreminder/save")
     public List<HashMap<String,Object>> saveReminder(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		Reminder reminderinappnotification = createReminder(vmjExchange);
+		Reminder reminderemailreminder = createReminder(vmjExchange);
 		return getAllReminder(vmjExchange);
 	}
 
     public Reminder createReminder(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Reminder result = reminderinappnotificationServiceImpl.createReminder(requestBody);
+			Reminder result = reminderemailreminderServiceImpl.createReminder(requestBody);
 			return result;
 		}
 		throw new NotFoundException("Route tidak ditemukan");
@@ -43,54 +43,58 @@ public class ReminderResourceImpl extends ReminderResourceDecorator {
     public Reminder createReminder(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Reminder result = reminderinappnotificationServiceImpl.createReminder(requestBody, id);
+			Reminder result = reminderemailreminderServiceImpl.createReminder(requestBody, id);
 			return result;
 		}
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
 	
-    @Route(url="call/inappnotification/update")
+    @Route(url="call/emailreminder/update")
     public HashMap<String, Object> updateReminder(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")){
 			return null;
 		}
-		return reminderinappnotificationServiceImpl.updateReminder(requestBody);
+		return reminderemailreminderServiceImpl.updateReminder(requestBody);
 	}
 
 	
-    @Route(url="call/inappnotification/detail")
+    @Route(url="call/emailreminder/detail")
     public HashMap<String, Object> getReminder(VMJExchange vmjExchange){
 		return record.getReminder(vmjExchange);
 	}
 
 	
-    @Route(url="call/inappnotification/list")
+    @Route(url="call/emailreminder/list")
     public List<HashMap<String,Object>> getAllReminder(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload();
-		return reminderinappnotificationServiceImpl.getAllReminder();
+		return reminderemailreminderServiceImpl.getAllReminder();
 	}
 
-    public List<HashMap<String,Object>> transformReminderListToHashMap(List<Reminder> ReminderInAppNotificationList){
+    public List<HashMap<String,Object>> transformReminderListToHashMap(List<Reminder> ReminderEmailReminderList){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < ReminderInAppNotificationList.size(); i++) {
-            resultList.add(ReminderInAppNotificationList.get(i).toHashMap());
+        for(int i = 0; i < ReminderEmailReminderList.size(); i++) {
+            resultList.add(ReminderEmailReminderList.get(i).toHashMap());
         }
 
         return resultList;
 	}
 
 	
-    @Route(url="call/inappnotification/delete")
+    @Route(url="call/emailreminder/delete")
     public List<HashMap<String,Object>> deleteReminder(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
 		
-		return reminderinappnotificationServiceImpl.deleteReminder(requestBody);
+		return reminderemailreminderServiceImpl.deleteReminder(requestBody);
 	}
 
+	public void sendsEmail(String emailAddress) {
+		// TODO: implement this method
+		throw new UnsupportedOperationException();
+	}
 	
 }

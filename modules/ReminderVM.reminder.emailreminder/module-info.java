@@ -1,8 +1,8 @@
-module ReminderVM.reminder.inappnotification {
+module ReminderVM.reminder.emailreminder {
 	requires ReminderVM.reminder.core;
-	exports ReminderVM.reminder.inappnotification.model;
-	exports ReminderVM.reminder.inappnotification.resource;
-	exports ReminderVM.reminder.inappnotification.service;
+	exports ReminderVM.reminder.emailreminder.model;
+	exports ReminderVM.reminder.emailreminder.resource;
+	exports ReminderVM.reminder.emailreminder.service;
 
 	requires id.ac.ui.cs.prices.winvmj.core;
 	requires id.ac.ui.cs.prices.winvmj.hibernate;
@@ -12,5 +12,5 @@ module ReminderVM.reminder.inappnotification {
 	requires java.naming;
 	requires java.net.http;
 
-	opens ReminderVM.reminder.inappnotification.model to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
+	opens ReminderVM.reminder.emailreminder.model to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
 }

@@ -23,35 +23,33 @@ import id.ac.ui.cs.prices.winvmj.auth.annotations.Restricted;
 public class ReminderServiceImpl extends ReminderServiceComponent{
 
     public Reminder createReminder(Map<String, Object> requestBody){
-		Object isDisabledRaw = requestBody.get("isDisabled");
-		boolean isDisabled = isDisabledRaw != null && (boolean) isDisabledRaw;
-		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
-		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
+		boolean isDisabled = (boolean) requestBody.get("isDisabled");
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
 		int minute = Integer.parseInt(minuteStr);
+		String remindingForIdStr = (String) requestBody.get("remindingForId");
+		int remindingForId = Integer.parseInt(remindingForIdStr);
 		
 		//to do: fix association attributes
 		
-		Reminder reminder = ReminderFactory.createReminder("ReminderVM.reminder.core.model.ReminderImpl", isDisabled, resendIntervalMin, hour, minute);
+		Reminder reminder = ReminderFactory.createReminder("ReminderVM.reminder.core.model.ReminderImpl", isDisabled, hour, minute, remindingForId);
 		Repository.saveObject(reminder);
 		return reminder;
 	}
 
 	public Reminder createReminder(Map<String, Object> requestBody, int id){
 		int idReminder = id;
-		Object isDisabledRaw = requestBody.get("isDisabled");
-		boolean isDisabled = isDisabledRaw != null && (boolean) isDisabledRaw;
-		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
-		int resendIntervalMin = Integer.parseInt(resendIntervalMinStr);
+		boolean isDisabled = (boolean) requestBody.get("isDisabled");
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
 		int minute = Integer.parseInt(minuteStr);
+		String remindingForIdStr = (String) requestBody.get("remindingForId");
+		int remindingForId = Integer.parseInt(remindingForIdStr);
 		
 		//to do: fix association attributes
-		Reminder reminder = ReminderFactory.createReminder("ReminderVM.reminder.core.model.ReminderImpl",idReminder, isDisabled, resendIntervalMin, hour, minute);
+		Reminder reminder = ReminderFactory.createReminder("ReminderVM.reminder.core.model.ReminderImpl",idReminder, isDisabled, hour, minute, remindingForId);
 		Repository.saveObject(reminder);
 		return reminder;
 	}
@@ -61,16 +59,15 @@ public class ReminderServiceImpl extends ReminderServiceComponent{
 		int id = Integer.parseInt(idStr);
 		Reminder reminder = Repository.getObject(id);
 		
-		Object isDisabledRaw = requestBody.get("isDisabled");
-		reminder.setIsDisabled(isDisabledRaw != null && (boolean) isDisabledRaw);
-		String resendIntervalMinStr = (String) requestBody.get("resendIntervalMin");
-		reminder.setResendIntervalMin(Integer.parseInt(resendIntervalMinStr));
-		
+		reminder.setIsDisabled((boolean) requestBody.get("isDisabled"));
 		String hourStr = (String) requestBody.get("hour");
 		reminder.setHour(Integer.parseInt(hourStr));
 		
 		String minuteStr = (String) requestBody.get("minute");
 		reminder.setMinute(Integer.parseInt(minuteStr));
+		
+		String remindingForIdStr = (String) requestBody.get("remindingForId");
+		reminder.setRemindingForId(Integer.parseInt(remindingForIdStr));
 		
 		
 		Repository.updateObject(reminder);
