@@ -8,6 +8,8 @@ import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import ReminderVM.reminder.core.model.ReminderDecorator;
 import ReminderVM.reminder.core.model.Reminder;
@@ -15,6 +17,7 @@ import ReminderVM.reminder.core.model.ReminderComponent;
 
 @Entity(name="reminder_emailreminder")
 @Table(name="reminder_emailreminder")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class ReminderImpl extends ReminderDecorator {
 
 	protected String email;
@@ -37,11 +40,6 @@ public class ReminderImpl extends ReminderDecorator {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public void sendsEmail(String emailAddress) {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
 	}
 
 	public HashMap<String, Object> toHashMap() {
