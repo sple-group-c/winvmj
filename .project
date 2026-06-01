@@ -8,6 +8,22 @@
 		<buildCommand>
 			<name>de.ovgu.featureide.core.extensibleFeatureProjectBuilder</name>
 			<arguments>
+				<dictionary>
+					<key>build</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>composer</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>equations</key>
+					<value></value>
+				</dictionary>
+				<dictionary>
+					<key>source</key>
+					<value></value>
+				</dictionary>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
