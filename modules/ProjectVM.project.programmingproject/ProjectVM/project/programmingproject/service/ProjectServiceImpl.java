@@ -21,12 +21,10 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
 		String onlineRepository = (String) requestBody.get("onlineRepository");
 		String defaultBranch = (String) requestBody.get("defaultBranch");
 		String repositoryLink = (String) requestBody.get("repositoryLink");
-		String idProjectStr = (String) requestBody.get("idProject");
-		int idProject = Integer.parseInt(idProjectStr);
 		String name = (String) requestBody.get("name");
 		String description = (String) requestBody.get("description");
 		Project projectprogrammingproject = record.createProject(requestBody);
-		Project projectprogrammingprojectdeco = ProjectFactory.createProject("ProjectVM.project.programmingproject", projectprogrammingproject, idProject, name, description, onlineRepository, defaultBranch, repositoryLink);
+		Project projectprogrammingprojectdeco = ProjectFactory.createProject("ProjectVM.project.programmingproject.model.ProjectImpl", projectprogrammingproject, onlineRepository, defaultBranch, repositoryLink);
 		Repository.saveObject(projectprogrammingprojectdeco);
 		return projectprogrammingprojectdeco;
 	}
@@ -40,7 +38,7 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
 		int idProject = Integer.parseInt(idProjectStr);
 		String name = (String) requestBody.get("name");
 		String description = (String) requestBody.get("description");
-		UUID recordProjectIdProject = ((ProjectDecorator) savedProject).getIdProject();
+		int recordProjectIdProject = ((ProjectDecorator) savedProject).getIdProject();
 		Project Project = record.createProject(requestBody, recordProjectIdProject);
 		Project projectprogrammingproject = ProjectFactory.createProject("ProjectVM.project.programmingproject.model.ProjectImpl", Project, idProject, name, description, onlineRepository, defaultBranch, repositoryLink);
 		return projectprogrammingproject;
@@ -48,6 +46,7 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
 
     public HashMap<String, Object> updateProject(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idProject");
+		int id = Integer.parseInt(idStr);
 		
 		Project projectprogrammingproject = Repository.getObject(id);
 		projectprogrammingproject = createProject(requestBody, id);

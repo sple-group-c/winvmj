@@ -15,10 +15,12 @@ import ProjectVM.project.programmingproject.service.ProjectServiceImpl;
 
 public class ProjectResourceImpl extends ProjectResourceDecorator {
 	protected ProjectServiceComponent recordComponent;
-	private ProjectServiceImpl projectprogrammingprojectServiceImpl = new ProjectServiceImpl(recordComponent);
+	private ProjectServiceImpl projectprogrammingprojectServiceImpl;
 
     public ProjectResourceImpl (ProjectResourceComponent record) {
         super(record);
+		this.recordComponent = new ProjectVM.project.core.service.ProjectServiceImpl();
+		this.projectprogrammingprojectServiceImpl = new ProjectServiceImpl(this.recordComponent);
     }
 
     
@@ -40,7 +42,7 @@ public class ProjectResourceImpl extends ProjectResourceDecorator {
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Project createProject(VMJExchange vmjExchange, UUID id){
+    public Project createProject(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Project result = projectprogrammingprojectServiceImpl.createProject(requestBody, id);
