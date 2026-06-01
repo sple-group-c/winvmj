@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 
+import TaskManagementVM.taskmanagement.core.service.TaskManagementServiceImpl;
 import ReminderVM.reminder.core.service.ReminderServiceDecorator;
 import ReminderVM.reminder.core.model.ReminderImpl;
 import ReminderVM.reminder.core.service.ReminderServiceComponent;
@@ -55,10 +57,16 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 	private void rescheduleAllReminders() {
 		try {
 			List<Reminder> reminders = Repository.getAllObject("reminder_emailreminder");
+			int scheduled = 0;
 			for (Reminder r : reminders) {
-				scheduleReminderEmail((ReminderVM.reminder.emailreminder.model.ReminderImpl) r);
+				try {
+					scheduleReminderEmail((ReminderVM.reminder.emailreminder.model.ReminderImpl) r);
+					scheduled++;
+				} catch (Exception e) {
+					logger.warning("Skipping reminder #" + r.getIdReminder() + " on startup: " + e.getMessage());
+				}
 			}
-			logger.info("Scheduled " + reminders.size() + " reminder(s) from DB.");
+			logger.info("Scheduled " + scheduled + "/" + reminders.size() + " reminder(s) from DB.");
 		} catch (Exception e) {
 			logger.severe("Failed to restore reminders on startup: " + e.getMessage());
 		}
@@ -72,7 +80,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 
 		// First schedule: we don't know if today's HH:MM already passed, so check.
 		// If it has, target tomorrow. If not, fire later today.
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Jakarta"));
 		LocalDateTime nextFire = now
 			.withHour(reminder.getHour())
 			.withMinute(reminder.getMinute())
@@ -102,7 +110,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 		// Anchor to tomorrow's exact wall-clock HH:MM 
 		// This corrects any accumulated drift — if we fired 2s late, the next delay
 		// is 24h - 2s, keeping the fire time pinned to the same minute each day.
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Jakarta"));
 		LocalDateTime nextFire = now.plusDays(1)
 			.withHour(reminder.getHour())
 			.withMinute(reminder.getMinute())
@@ -148,9 +156,17 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 		}
 
 		try {
+			TaskManagementServiceImpl taskService = new TaskManagementServiceImpl();
+			String taskLabel = "#" + reminder.getRemindingForId();
+			for (java.util.HashMap<String, Object> t : taskService.getAllTaskManagement()) {
+				if (((Number) t.get("idTask")).intValue() == reminder.getRemindingForId()) {
+					taskLabel = "#" + reminder.getRemindingForId() + " - " + t.get("title");
+					break;
+				}
+			}
 			String text = String.format(
-				"Reminder for task #%d at %02d:%02d.",
-				reminder.getRemindingForId(), reminder.getHour(), reminder.getMinute()
+				"Reminder for task %s at %02d:%02d.",
+				taskLabel, reminder.getHour(), reminder.getMinute()
 			);
 			String payload = buildSendGridPayload(fromEmail, reminder.getEmail(), "Reminder Notification", text);
 
@@ -186,7 +202,7 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 
  	public Reminder createReminder(Map<String, Object> requestBody){
 		String email = (String) requestBody.get("email");
-		boolean isDisabled = (boolean) requestBody.get("isDisabled");
+		boolean isDisabled = Boolean.parseBoolean((String) requestBody.get("isDisabled"));
 		String hourStr = (String) requestBody.get("hour");
 		int hour = Integer.parseInt(hourStr);
 		String minuteStr = (String) requestBody.get("minute");
@@ -196,7 +212,12 @@ public class ReminderServiceImpl extends ReminderServiceDecorator {
 		Reminder reminderemailreminder = record.createReminder(requestBody);
 		Reminder reminderemailreminderdeco = ReminderFactory.createReminder("ReminderVM.reminder.emailreminder.model.ReminderImpl", reminderemailreminder, email);
 		Repository.saveObject(reminderemailreminderdeco);
-		scheduleReminderEmail((ReminderVM.reminder.emailreminder.model.ReminderImpl) reminderemailreminderdeco);
+		// Build a fresh in-memory object from the parsed values to avoid Hibernate
+		// state corruption that can occur after Repository.saveObject merges entities.
+		ReminderImpl freshCore = new ReminderImpl(reminderemailreminder.getIdReminder(), isDisabled, hour, minute, remindingForId);
+		ReminderVM.reminder.emailreminder.model.ReminderImpl freshDeco =
+			new ReminderVM.reminder.emailreminder.model.ReminderImpl(freshCore, email);
+		scheduleReminderEmail(freshDeco);
 		return reminderemailreminderdeco;
 	}
 
