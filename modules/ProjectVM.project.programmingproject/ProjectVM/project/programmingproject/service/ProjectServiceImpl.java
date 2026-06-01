@@ -1,4 +1,4 @@
-package ProjectVM.project.projectdelta.service;
+package ProjectVM.project.programmingproject.service;
 
 import java.util.*;
 import java.lang.*;
@@ -18,47 +18,51 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
     }
 
  	public Project createProject(Map<String, Object> requestBody){
-		String idProjectStr = (String) requestBody.get("idProject");
-		int idProject = Integer.parseInt(idProjectStr);
+		String onlineRepository = (String) requestBody.get("onlineRepository");
+		String defaultBranch = (String) requestBody.get("defaultBranch");
+		String repositoryLink = (String) requestBody.get("repositoryLink");
 		String name = (String) requestBody.get("name");
 		String description = (String) requestBody.get("description");
-		Project projectprojectdelta = record.createProject(requestBody);
-		Project projectprojectdeltadeco = ProjectFactory.createProject("ProjectVM.project.projectdelta", projectprojectdelta, idProject, name, description);
-		Repository.saveObject(projectprojectdeltadeco);
-		return projectprojectdeltadeco;
+		Project projectprogrammingproject = record.createProject(requestBody);
+		Project projectprogrammingprojectdeco = ProjectFactory.createProject("ProjectVM.project.programmingproject.model.ProjectImpl", projectprogrammingproject, onlineRepository, defaultBranch, repositoryLink);
+		Repository.saveObject(projectprogrammingprojectdeco);
+		return projectprogrammingprojectdeco;
 	}
 
 	public Project createProject(Map<String, Object> requestBody, int id){
 		Project savedProject = Repository.getObject(id);
+		String onlineRepository = (String) requestBody.get("onlineRepository");
+		String defaultBranch = (String) requestBody.get("defaultBranch");
+		String repositoryLink = (String) requestBody.get("repositoryLink");
 		String idProjectStr = (String) requestBody.get("idProject");
 		int idProject = Integer.parseInt(idProjectStr);
 		String name = (String) requestBody.get("name");
 		String description = (String) requestBody.get("description");
 		int recordProjectIdProject = ((ProjectDecorator) savedProject).getIdProject();
 		Project Project = record.createProject(requestBody, recordProjectIdProject);
-		Project projectprojectdelta = ProjectFactory.createProject("ProjectVM.project.projectdelta.model.ProjectImpl", Project, idProject, name, description);
-		return projectprojectdelta;
+		Project projectprogrammingproject = ProjectFactory.createProject("ProjectVM.project.programmingproject.model.ProjectImpl", Project, idProject, name, description, onlineRepository, defaultBranch, repositoryLink);
+		return projectprogrammingproject;
 	}
 
     public HashMap<String, Object> updateProject(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idProject");
 		int id = Integer.parseInt(idStr);
 		
-		Project projectprojectdelta = Repository.getObject(id);
-		projectprojectdelta = createProject(requestBody, id);
+		Project projectprogrammingproject = Repository.getObject(id);
+		projectprogrammingproject = createProject(requestBody, id);
 		
-		Repository.updateObject(projectprojectdelta);
-		projectprojectdelta = Repository.getObject(id);
+		Repository.updateObject(projectprogrammingproject);
+		projectprogrammingproject = Repository.getObject(id);
 		
 		//to do: fix association attributes
 		
-		return projectprojectdelta.toHashMap();
+		return projectprogrammingproject.toHashMap();
 	}
 
 	public HashMap<String, Object> getProject(String idStr){
 		int id = Integer.parseInt(idStr);
-		Project projectprojectdelta = Repository.getObject(id);
-		return projectprojectdelta.toHashMap();
+		Project projectprogrammingproject = Repository.getObject(id);
+		return projectprogrammingproject.toHashMap();
 	}
 
 	public HashMap<String, Object> getProjectById(int id){
@@ -73,7 +77,7 @@ public class ProjectServiceImpl extends ProjectServiceDecorator {
 	}
 
     public List<HashMap<String,Object>> getAllProject(){
-		List<Project> List = Repository.getAllObject("project_projectdelta");
+		List<Project> List = Repository.getAllObject("project_programmingproject");
 		return transformListToHashMap(List);
 	}
 

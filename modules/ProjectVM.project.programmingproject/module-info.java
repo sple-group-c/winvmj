@@ -1,8 +1,8 @@
-module ProjectVM.project.projectdelta {
+module ProjectVM.project.programmingproject {
 	requires ProjectVM.project.core;
-	exports ProjectVM.project.projectdelta.model;
-	exports ProjectVM.project.projectdelta.resource;
-	exports ProjectVM.project.projectdelta.service;
+	exports ProjectVM.project.programmingproject.model;
+	exports ProjectVM.project.programmingproject.resource;
+	exports ProjectVM.project.programmingproject.service;
 
 	requires id.ac.ui.cs.prices.winvmj.core;
 	requires id.ac.ui.cs.prices.winvmj.hibernate;
@@ -12,5 +12,5 @@ module ProjectVM.project.projectdelta {
 	requires java.naming;
 	requires java.net.http;
 
-	opens ProjectVM.project.projectdelta.model to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
+	opens ProjectVM.project.programmingproject.model to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
 }
