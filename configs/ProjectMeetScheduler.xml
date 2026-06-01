@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature automatic="selected" name="SchedulingManagementSystem"/>
+	<feature automatic="selected" name="TaskManagement"/>
+	<feature automatic="selected" manual="selected" name="Project"/>
+	<feature name="ProgrammingProject"/>
+	<feature automatic="selected" name="Label"/>
+	<feature automatic="unselected" name="BeritaBoard"/>
+	<feature name="Reminder"/>
+	<feature name="EmailReminder"/>
+	<feature automatic="selected" name="MeetingManagement"/>
+	<feature manual="selected" name="ProjectMeeting"/>
+</configuration>
