@@ -93,8 +93,18 @@ public class ReminderResourceImpl extends ReminderResourceDecorator {
 	}
 
 	public void sendsEmail(String emailAddress) {
-		// TODO: implement this method
-		throw new UnsupportedOperationException();
+		((ReminderServiceImpl) reminderemailreminderServiceImpl).sendsEmail(emailAddress);
 	}
-	
+
+	@Route(url="call/emailreminder/deleteByTask")
+	public List<HashMap<String,Object>> deleteRemindersByTask(VMJExchange vmjExchange) {
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+		Map<String, Object> requestBody = vmjExchange.getPayload();
+		String taskIdStr = (String) requestBody.get("taskId");
+		int taskId = Integer.parseInt(taskIdStr);
+		return ((ReminderServiceImpl) reminderemailreminderServiceImpl).deleteRemindersByTaskId(taskId);
+	}
+
 }

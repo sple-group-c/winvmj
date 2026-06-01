@@ -6,10 +6,17 @@ import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import TaskManagementVM.taskmanagement.core.model.TaskManagementComponent;
 
 @Entity
 @Table(name="reminder_comp")
@@ -21,6 +28,12 @@ public abstract class ReminderComponent implements Reminder{
 	protected int hour;
 	protected int minute;
 	protected int remindingForId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "remindingforid", insertable = false, updatable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	protected TaskManagementComponent remindingForTask;
+
 	protected String objectName = ReminderComponent.class.getName();
 
 	public ReminderComponent() {
