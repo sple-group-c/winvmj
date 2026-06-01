@@ -34,9 +34,6 @@ services:
       AMANAH_DB_URL: ${AMANAH_DB_URL:-jdbc:postgresql://postgres:5432/projectmanagement}
       AMANAH_DB_USERNAME: ${AMANAH_DB_USERNAME:-postgres}
       AMANAH_DB_PASSWORD: ${AMANAH_DB_PASSWORD:-postgres123}
-      SMTP_API_URL: ${SMTP_API_URL:-https://api.sendgrid.com/v3/mail/send}
-      SMTP_API_KEY: ${SMTP_API_KEY}
-      SMTP_FROM: ${SMTP_FROM:-reminder@mhibrizif.site}
     ports:
       - "${HOST_PORT_BE:-7776}:${AMANAH_PORT_BE:-7776}"
     networks:

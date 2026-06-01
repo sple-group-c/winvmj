@@ -42,8 +42,7 @@ public class MeetingManagementImpl extends MeetingManagementDecorator {
 	public HashMap<String, Object> toHashMap() {
 		HashMap<String, Object> map = record.toHashMap();
 		map.put("idMeeting", getIdMeeting());
-		map.put("project", project != null ? project.toHashMap() : null);
-
+		map.put("projectName", project != null ? project.getName() : null);
 		return map;
 	}
 }
