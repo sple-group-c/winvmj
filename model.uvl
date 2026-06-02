@@ -9,6 +9,8 @@ features
 				optional
 					ProgrammingProject
 			Label
+				optional
+					LabelDelta
 			BeritaBoard
 			Reminder
 				optional

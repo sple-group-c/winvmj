@@ -17,6 +17,7 @@ import LabelVM.label.core.model.LabelComponent;
 @Table(name = "label_labeldelta")
 public class LabelImpl extends LabelDecorator {
 
+	public String color;
 	public LabelImpl() {
 		super();
 		Random r = new Random();
@@ -24,14 +25,20 @@ public class LabelImpl extends LabelDecorator {
 		this.objectName = LabelImpl.class.getName();
 	}
 
-	public LabelImpl(LabelComponent record) {
+	public LabelImpl(LabelComponent record, String color) {
 		super(record, LabelImpl.class.getName());
+		this.color = color;
 		this.objectName = LabelImpl.class.getName();
+	}
+
+	public String getColor() {
+		return this.color;
 	}
 
 	public HashMap<String, Object> toHashMap() {
 		HashMap<String, Object> map = record.toHashMap();
 		map.put("idLabel", idLabel);
+		map.put("color", getColor());
 
 		return map;
 	}
