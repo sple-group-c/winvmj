@@ -2,8 +2,11 @@
     "TaskManagement":["TaskManagementVM.taskmanagement.core"],
     "Project":["ProjectVM.project.core"],
     "Reminder":["ReminderVM.reminder.core"],
+    "EmailReminder":["ReminderVM.reminder.emailreminder"],
     "Label":["LabelVM.label.core"],
     "LabelDelta": ["LabelVM.label.labeldelta"],
     "BeritaBoard":["BeritaBoardVM.beritaboard.core"],
-    "MeetingManagement":["MeetingManagementVM.meetingmanagement.core"]
+    "MeetingManagement":["MeetingManagementVM.meetingmanagement.core"],
+    "ProjectMeeting":["MeetingManagementVM.meetingmanagement.projectmeetingdelta"],
+    "ProgrammingProject":["ProjectVM.project.programmingproject"]
 }

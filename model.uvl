@@ -1,18 +1,28 @@
+namespace SchedulingManagementSystem
+
 features
-    SchedulingManagementSystem
-        mandatory
-            TaskManagement
-        optional
-            Project
-            Label
-                optional
-                    LabelDelta
-            BeritaBoard
-            Reminder
-            MeetingManagement
+	SchedulingManagementSystem
+		mandatory
+			TaskManagement
+		optional
+			Project
+				optional
+					ProgrammingProject
+			Label
+				optional
+					LabelDelta
+			BeritaBoard
+			Reminder
+				optional
+					EmailReminder
+			MeetingManagement
+				optional
+					ProjectMeeting
 
 constraints
-    Project => Label
-    Project | Label | BeritaBoard
-    !(BeritaBoard & Reminder)
-    !(Label & BeritaBoard)
+	Project => Label
+	Project | Label | BeritaBoard
+	!(BeritaBoard & Reminder)
+	!(Label & BeritaBoard)
+	ProjectMeeting => Project
+	Reminder => TaskManagement

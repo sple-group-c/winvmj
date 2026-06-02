@@ -18,23 +18,29 @@ public class BeritaBoardServiceImpl extends BeritaBoardServiceDecorator {
     }
 
  	public BeritaBoard createBeritaBoard(Map<String, Object> requestBody){
+		String beritaidStr = (String) requestBody.get("beritaid");
+		int beritaid = Integer.parseInt(beritaidStr);
 		String content = (String) requestBody.get("content");
 		BeritaBoard beritaboardfansramy = record.createBeritaBoard(requestBody);
-		BeritaBoard beritaboardfansramydeco = BeritaBoardFactory.createBeritaBoard("BeritaBoardVM.beritaboard.fansramy.model.BeritaBoardImpl", beritaboardfansramy, );
+		BeritaBoard beritaboardfansramydeco = BeritaBoardFactory.createBeritaBoard("BeritaBoardVM.beritaboard.fansramy", beritaboardfansramy, beritaid, content);
 		Repository.saveObject(beritaboardfansramydeco);
 		return beritaboardfansramydeco;
 	}
 
 	public BeritaBoard createBeritaBoard(Map<String, Object> requestBody, int id){
 		BeritaBoard savedBeritaBoard = Repository.getObject(id);
-		UUID recordBeritaBoardBeritaid = ((BeritaBoardDecorator) savedBeritaBoard).getBeritaid();
-		BeritaBoard beritaboard = record.createBeritaBoard(requestBody, recordBeritaBoardBeritaid);
-		BeritaBoard beritaboardfansramy = BeritaBoardFactory.createBeritaBoard("BeritaBoardVM.beritaboard.fansramy.BeritaBoardImpl", beritaboard, );
+		String beritaidStr = (String) requestBody.get("beritaid");
+		int beritaid = Integer.parseInt(beritaidStr);
+		String content = (String) requestBody.get("content");
+		int recordBeritaBoardBeritaid = ((BeritaBoardDecorator) savedBeritaBoard).getBeritaid();
+		BeritaBoard BeritaBoard = record.createBeritaBoard(requestBody, recordBeritaBoardBeritaid);
+		BeritaBoard beritaboardfansramy = BeritaBoardFactory.createBeritaBoard("BeritaBoardVM.beritaboard.fansramy.model.BeritaBoardImpl", BeritaBoard, beritaid, content);
 		return beritaboardfansramy;
 	}
 
     public HashMap<String, Object> updateBeritaBoard(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("beritaid");
+		int id = Integer.parseInt(idStr);
 		
 		BeritaBoard beritaboardfansramy = Repository.getObject(id);
 		beritaboardfansramy = createBeritaBoard(requestBody, id);

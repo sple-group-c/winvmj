@@ -3,6 +3,7 @@ module MeetingManagementVM.meetingmanagement.core {
 	exports MeetingManagementVM.meetingmanagement.core.model;
 	exports MeetingManagementVM.meetingmanagement.core.resource;
 	exports MeetingManagementVM.meetingmanagement.core.service;
+
 	requires id.ac.ui.cs.prices.winvmj.core;
 	requires id.ac.ui.cs.prices.winvmj.hibernate;
 	requires id.ac.ui.cs.prices.winvmj.auth;
@@ -12,5 +13,6 @@ module MeetingManagementVM.meetingmanagement.core {
 	requires java.net.http;
 
 	opens MeetingManagementVM.meetingmanagement to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
-	opens MeetingManagementVM.meetingmanagement.core.model to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
+	opens MeetingManagementVM.meetingmanagement.core.model
+			to org.hibernate.orm.core, gson, id.ac.ui.cs.prices.winvmj.hibernate;
 }

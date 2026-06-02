@@ -6,10 +6,17 @@ import id.ac.ui.cs.prices.winvmj.core.Route;
 import id.ac.ui.cs.prices.winvmj.core.VMJExchange;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import TaskManagementVM.taskmanagement.core.model.TaskManagementComponent;
 
 @Entity
 @Table(name="reminder_comp")
@@ -17,9 +24,16 @@ import javax.persistence.Table;
 public abstract class ReminderComponent implements Reminder{
 	@Id
 	protected int idReminder; 
-	protected String isDisabled;
-	protected int resendIntervalMin;
-	protected String timeTrigger;
+	protected boolean isDisabled;
+	protected int hour;
+	protected int minute;
+	protected int remindingForId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "remindingforid", insertable = false, updatable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	protected TaskManagementComponent remindingForTask;
+
 	protected String objectName = ReminderComponent.class.getName();
 
 	public ReminderComponent() {
@@ -27,12 +41,13 @@ public abstract class ReminderComponent implements Reminder{
 	} 
 
 	public ReminderComponent(
-        int idReminder, String isDisabled, int resendIntervalMin, String timeTrigger
+        int idReminder, boolean isDisabled, int hour, int minute, int remindingForId
     ) {
         this.idReminder = idReminder;
         this.isDisabled = isDisabled;
-        this.resendIntervalMin = resendIntervalMin;
-        this.timeTrigger = timeTrigger;
+        this.hour = hour;
+        this.minute = minute;
+        this.remindingForId = remindingForId;
     }
 
 	public int getIdReminder() {
@@ -42,26 +57,33 @@ public abstract class ReminderComponent implements Reminder{
 	public void setIdReminder(int idReminder) {
 		this.idReminder = idReminder;
 	}
-	public String getIsDisabled() {
+	public boolean getIsDisabled() {
 		return this.isDisabled;
 	}
 
-	public void setIsDisabled(String isDisabled) {
+	public void setIsDisabled(boolean isDisabled) {
 		this.isDisabled = isDisabled;
 	}
-	public int getResendIntervalMin() {
-		return this.resendIntervalMin;
+	public int getHour() {
+		return this.hour;
 	}
 
-	public void setResendIntervalMin(int resendIntervalMin) {
-		this.resendIntervalMin = resendIntervalMin;
+	public void setHour(int hour) {
+		this.hour = hour;
 	}
-	public String getTimeTrigger() {
-		return this.timeTrigger;
+	public int getMinute() {
+		return this.minute;
 	}
 
-	public void setTimeTrigger(String timeTrigger) {
-		this.timeTrigger = timeTrigger;
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+	public int getRemindingForId() {
+		return this.remindingForId;
+	}
+
+	public void setRemindingForId(int remindingForId) {
+		this.remindingForId = remindingForId;
 	}
  
 
@@ -70,8 +92,9 @@ public abstract class ReminderComponent implements Reminder{
         return "{" +
             " idReminder='" + getIdReminder() + "'" +
             " isDisabled='" + getIsDisabled() + "'" +
-            " resendIntervalMin='" + getResendIntervalMin() + "'" +
-            " timeTrigger='" + getTimeTrigger() + "'" +
+            " hour='" + getHour() + "'" +
+            " minute='" + getMinute() + "'" +
+            " remindingForId='" + getRemindingForId() + "'" +
             "}";
     }
 	

@@ -40,7 +40,7 @@ public class TaskManagementResourceImpl extends TaskManagementResourceDecorator 
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public TaskManagement createTaskManagement(VMJExchange vmjExchange, UUID id){
+    public TaskManagement createTaskManagement(VMJExchange vmjExchange, int id){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			TaskManagement result = taskmanagementtaskdeltaServiceImpl.createTaskManagement(requestBody, id);

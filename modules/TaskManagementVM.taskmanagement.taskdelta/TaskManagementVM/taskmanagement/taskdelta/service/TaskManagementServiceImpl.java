@@ -18,25 +18,33 @@ public class TaskManagementServiceImpl extends TaskManagementServiceDecorator {
     }
 
  	public TaskManagement createTaskManagement(Map<String, Object> requestBody){
+		String idTaskStr = (String) requestBody.get("idTask");
+		int idTask = Integer.parseInt(idTaskStr);
 		String title = (String) requestBody.get("title");
 		String description = (String) requestBody.get("description");
 		String status = (String) requestBody.get("status");
 		TaskManagement taskmanagementtaskdelta = record.createTaskManagement(requestBody);
-		TaskManagement taskmanagementtaskdeltadeco = TaskManagementFactory.createTaskManagement("TaskManagementVM.taskmanagement.taskdelta.model.TaskManagementImpl", taskmanagementtaskdelta, );
+		TaskManagement taskmanagementtaskdeltadeco = TaskManagementFactory.createTaskManagement("TaskManagementVM.taskmanagement.taskdelta", taskmanagementtaskdelta, idTask, title, description, status);
 		Repository.saveObject(taskmanagementtaskdeltadeco);
 		return taskmanagementtaskdeltadeco;
 	}
 
 	public TaskManagement createTaskManagement(Map<String, Object> requestBody, int id){
 		TaskManagement savedTaskManagement = Repository.getObject(id);
-		UUID recordTaskManagementIdTask = ((TaskManagementDecorator) savedTaskManagement).getIdTask();
-		TaskManagement taskmanagement = record.createTaskManagement(requestBody, recordTaskManagementIdTask);
-		TaskManagement taskmanagementtaskdelta = TaskManagementFactory.createTaskManagement("TaskManagementVM.taskmanagement.taskdelta.TaskManagementImpl", taskmanagement, );
+		String idTaskStr = (String) requestBody.get("idTask");
+		int idTask = Integer.parseInt(idTaskStr);
+		String title = (String) requestBody.get("title");
+		String description = (String) requestBody.get("description");
+		String status = (String) requestBody.get("status");
+		int recordTaskManagementIdTask = ((TaskManagementDecorator) savedTaskManagement).getIdTask();
+		TaskManagement TaskManagement = record.createTaskManagement(requestBody, recordTaskManagementIdTask);
+		TaskManagement taskmanagementtaskdelta = TaskManagementFactory.createTaskManagement("TaskManagementVM.taskmanagement.taskdelta.model.TaskManagementImpl", TaskManagement, idTask, title, description, status);
 		return taskmanagementtaskdelta;
 	}
 
     public HashMap<String, Object> updateTaskManagement(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idTask");
+		int id = Integer.parseInt(idStr);
 		
 		TaskManagement taskmanagementtaskdelta = Repository.getObject(id);
 		taskmanagementtaskdelta = createTaskManagement(requestBody, id);

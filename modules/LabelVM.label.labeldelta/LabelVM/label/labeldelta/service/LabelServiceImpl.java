@@ -30,14 +30,15 @@ public class LabelServiceImpl extends LabelServiceDecorator {
 	public Label createLabel(Map<String, Object> requestBody, int id){
 		Label savedLabel = Repository.getObject(id);
 		String color = (String) requestBody.get("color");
-		UUID recordLabelIdLabel = ((LabelDecorator) savedLabel).getIdLabel();
+		int recordLabelIdLabel = ((LabelDecorator) savedLabel).getIdLabel();
 		Label label = record.createLabel(requestBody, recordLabelIdLabel);
-		Label labellabeldelta = LabelFactory.createLabel("LabelVM.label.labeldelta.LabelImpl", label, color);
+		Label labellabeldelta = LabelFactory.createLabel("LabelVM.label.labeldelta.model.LabelImpl", label, color);
 		return labellabeldelta;
 	}
 
     public HashMap<String, Object> updateLabel(Map<String, Object> requestBody){
 		String idStr = (String) requestBody.get("idLabel");
+		int id = Integer.parseInt(idStr);
 		
 		Label labellabeldelta = Repository.getObject(id);
 		labellabeldelta = createLabel(requestBody, id);
